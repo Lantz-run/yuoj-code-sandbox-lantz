@@ -1,4 +1,4 @@
-# 代码沙箱
+代码沙箱
 
 ## 判题机模块预开发
 
@@ -14,7 +14,7 @@
 
 这两个模块完全解耦
 
-![img](file:///D:/StarProjects/OJ%20System/XUML/梳理判题模块和代码沙箱的关系.png)
+![](src/images/image01.png)
 
 
 
@@ -166,7 +166,7 @@ Q：每个代码沙箱类都写一遍 log.info() ？难道每次调用代码沙�
 
 A：使用代理模式，提供一个 Proxy，来增强代码沙箱的能力（代理模式作用就是增强能力）。
 
-![](D:\StarProjects\OJ System\XUML\代码沙箱代理.png)
+![](src/images/image02.png)
 
 使用方式：
 
@@ -431,7 +431,7 @@ Windows
 
 
 
-如果遇到message=null，如图![1742310569604](D:\StarProjects\OJ System\XUML\images\1742310569604.png)
+如果遇到message=null，如图![1742310569604](src/images/image03.png)
 
 解决方案：
 
@@ -618,7 +618,7 @@ java -cp . Main 1 2
 
 ### Linux Ubuntu 编译运行 Java
 
-![1742130876298](D:\StarProjects\OJ System\XUML\images\1742130876298.png)
+![1742130876298](src/images/image04.png)
 
 
 
@@ -1013,7 +1013,7 @@ public class Main {
 
 JVisualVM 或 JConsole（在 jdk bin目录下） 工具，可以连接到 JVM 虚拟机上可视化来查看运行状态
 
-![1739781607406](C:\Users\86137\AppData\Roaming\Typora\typora-user-images\1739781607406.png)
+![1739781607406](src/images/image05.png)
 
 
 
@@ -1193,7 +1193,7 @@ java -Xmx256m
 
 注意！-Xmx 参数、JVM 的堆内存限制，不等同于系统实际占用的最大资源，可能会超出
 
-![1739802133924](C:/Users/86137/AppData/Roaming/Typora/typora-user-images/1739802133924.png)
+![1739802133924](src/images/image06.png)
 
 如果需要更严格的内存限制，要在系统层面去限制，而不是  JVM 层面的限制。
 
@@ -1213,7 +1213,7 @@ private static final List<String> blackList = Arrays.asList("Files", "exec");
 
 HuTool 字典树工具类：WordTree，可以用更少的空间存储更多的敏感词汇，实现更高效的敏感词汇查找：
 
-![](D:/OJ%20System/XUML/WordTree.png)
+![](src/images/WordTree.png)
 
 `可以写在简历上`
 
@@ -1366,15 +1366,15 @@ java -Xmx256m -Dfile.encoding=UTF-8 -cp %s;%s -Djava.security.manager=MySecurity
 
 ### 远程开发
 
-![img](file:///D:/StarProjects/OJ%20System/XUML/远程开发.png)
+![img](src/images/image07.png)
 
 ### 纯远程开发
 
 运行相同项目对比：
 
-![1740071980892](C:/Users/86137/AppData/Roaming/Typora/typora-user-images/1740071980892.png)
+![1740071980892](src/images/image08.png)
 
-![img](file:///D:/StarProjects/OJ%20System/XUML/纯远程开发.png)
+![img](src/images/image09.png)
 
 ### Docker 安装镜像报错：
 
@@ -1473,7 +1473,7 @@ Docker 技术可以程序和宿主机的隔离。
 
 Dockerfile：制作镜像的文件，可以理解为制作镜像的一个清单
 
-![1740129839078](C:/Users/86137/AppData/Roaming/Typora/typora-user-images/1740129839078.png)
+![1740129839078](src/images/image10.png)
 
 镜像仓库：存放镜像的仓库，用户可以从仓库下载现成的镜像，也可以把做好的镜像放到仓库里
 
@@ -1495,7 +1495,7 @@ Dockerfile：制作镜像的文件，可以理解为制作镜像的一个清单
 
 
 
-![1740130575193](C:\Users\86137\AppData\Roaming\Typora\typora-user-images\1740130575193.png)
+![1740130575193](src/images/image11.png)
 
 
 
@@ -1656,7 +1656,7 @@ DockerClient（推荐）：才是真正和Docker守护进程交互的、最方�
 -Djdk.lang.Process.launchMechanism=vfork
 ```
 
-![1740154293928](C:\Users\86137\AppData\Roaming\Typora\typora-user-images\1740154293928.png)
+![1740154293928](src/images/image12.png)
 
 拉取镜像：
 
@@ -1799,7 +1799,7 @@ docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 docker exec recursing_poitras java -cp /app Main 1 3
 ```
 
-![1742275057398](D:\StarProjects\OJ System\XUML\images\1742275057398.png)
+![1742275057398](src/images/image13.png)
 
 注意，要把命令按照空格拆分，作为一个数组传递，否则可能会被识别为一个字符串，而不是多个参数。
 
@@ -2012,7 +2012,7 @@ Docker 容器已经做了系统层面的隔离，比较安全，但不能保证�
 
 2. 限制代码 - 黑白名单
 
-   ![](D:\StarProjects\OJ System\XUML\WordTree.png)
+   ![](src/images/WordTree.png)
 
 3. 限制用户的操作权限（文件、网络、执行）
 
