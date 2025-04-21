@@ -11,8 +11,10 @@ import com.yuoj.yuojcodesandbox.model.JudgeInfo;
 import com.yuoj.yuojcodesandbox.utils.ProcessUtils;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +59,10 @@ public abstract class JavaCodeSandboxTemplate implements CodeSandBox {
         ExecuteCodeResponse outputResponse = getOutputResponse(executeMessageList);
 
         // 5. 文件清理
-//        boolean b = deleteFile(userCodeFile);
-//        if (!b) {
-//            log.error("deleteFile error, userCodeFilePath = {}", userCodeFile.getAbsolutePath());
-//        }
+        boolean b = deleteFile(userCodeFile);
+        if (!b) {
+            log.error("deleteFile error, userCodeFilePath = {}", userCodeFile.getAbsolutePath());
+        }
         return outputResponse;
     }
 
@@ -114,11 +116,20 @@ public abstract class JavaCodeSandboxTemplate implements CodeSandBox {
         String userCodeParentPath = userCodeFile.getParentFile().getAbsolutePath();
 
         List<ExecuteMessage> executeMessageList = new ArrayList<>();
-        for (String inputArgs : inputList) {
+        for (String inputLine : inputList) {
 //            String runCmd = String.format("java -Xmx256m -Dfile.encoding=UTF-8 -cp %s Main %s", userCodeParentPath, inputArgs);
-            String runCmd = String.format("java -Xmx256m -Dfile.encoding=UTF-8 -cp %s Main %s", userCodeParentPath, inputArgs);
+            String runCmd = String.format("java -Xmx256m -Dfile.encoding=UTF-8 -cp %s Main %s", userCodeParentPath, inputLine);
+            // 1. 直接传递整行输入（无需分割，保留空格）
+            String formattedInput = inputLine + "\n";  // 添加换行符表示输入结束
             try {
                 Process runProcess = Runtime.getRuntime().exec(runCmd);
+                // 关键修改：向进程写入输入数据
+                // 3. 写入整行输入（包含空格）
+                try (BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(runProcess.getOutputStream()))) {
+                    writer.write(formattedInput);  // 例如写入 "abcfbc abfcab\n"
+                    writer.flush();
+                }
                 // 超时控制
                 new Thread(() -> {
                     try {
