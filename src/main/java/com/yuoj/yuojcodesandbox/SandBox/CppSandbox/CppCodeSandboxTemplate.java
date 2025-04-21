@@ -136,18 +136,19 @@ public abstract class CppCodeSandboxTemplate implements CodeSandBox {
 
         // 2. 构造运行命令（处理参数和空格）
 //        String inputArgs = String.join(" ", inputList);
-        for (String inputArgs : inputList) {
+        for (String inputLine : inputList) {
             String runCmd = parentDir + File.separator + "Main.exe";
+            // 1. 直接传递整行输入（无需分割，保留空格）
+            String formattedInput = inputLine + "\n";  // 添加换行符表示输入结束
             try {
                 Process runProcess = Runtime.getRuntime().exec(runCmd);
 
                 // 关键修改：向进程写入输入数据
+                // 3. 写入整行输入（包含空格）
                 try (BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(runProcess.getOutputStream()))) {
-                    // 将输入参数格式化为程序所需格式（如换行分隔）
-                    String formattedInput = inputArgs.replace(" ", "\n") + "\n";
-                    writer.write(formattedInput);
-                    writer.flush(); // 必须刷新缓冲区
+                    writer.write(formattedInput);  // 例如写入 "abcfbc abfcab\n"
+                    writer.flush();
                 }
 
                 // 超时控制
